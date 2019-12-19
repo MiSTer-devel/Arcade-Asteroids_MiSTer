@@ -1,0 +1,17 @@
+<misterromdescription>
+	<name>Asteroids (rev 4)</name>
+	<mameversion>0216</mameversion>
+	<mratimestamp>201911270000</mratimestamp>
+	<year>1979</year>
+	<manufacturer>Atari</manufacturer>
+	<category>Space / Asteroids</category>
+	<category>Space / Fighter</category>
+	<rbf>asteroids</rbf>
+	<rom index="0" zip="asteroid.zip" md5="1bcd2899e3f92d2824a2ac9def2d3286" type="merged|nonmerged">
+		<part name="035145-04e.ef2"/>
+		<part name="035144-04e.h2"/>
+		<part name="035143-02.j2"/>
+		<part name="035127-02.np3"/>
+		<part name="034602-01.c8"/>
+	</rom>
+</misterromdescription>
