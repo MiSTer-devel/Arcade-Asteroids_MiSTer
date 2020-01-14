@@ -99,30 +99,29 @@ assign HDMI_ARY = status[1] ? 8'd9  : 8'd3;
 `include "build_id.v" 
 localparam CONF_STR = {
 	"A.ASTEROID;;",
-	"O1,Aspect Ratio,Original,Wide;",
-//	"O2,Orientation,Vert,Horz;",
-//	"O35,Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",  
+	"H0O1,Aspect Ratio,Original,Wide;",
 	"O34,Language,English,German,French,Spanish;",
 	"O6,Ships,3,4;", // system locks up when activating above 3-5
 	"O7,Test,Off,On;", 
 	"-;",
 	"R0,Reset;",
-	"J1,Fire,Thrust,Hyperspace,Start;",	
+	"J1,Fire,Thrust,Hyperspace,Start,Coin;",	
+	"jn,A,X,B,Start,Select,R;",
 	"V,v",`BUILD_DATE
 };
 
 ////////////////////   CLOCKS   ///////////////////
 
-wire clk_6, clk_25,clk_24;
+wire clk_6, clk_25,clk_50;
 wire pll_locked;
 
 pll pll
 (
 	.refclk(CLK_50M),
 	.rst(0),
-	.outclk_0(clk_6),	
+	.outclk_0(clk_50),	
 	.outclk_1(clk_25),	
-	.outclk_2(clk_24),	
+	.outclk_2(clk_6),	
 	.locked(pll_locked)
 );
 
@@ -132,6 +131,7 @@ pll pll
 wire [31:0] status;
 wire  [1:0] buttons;
 wire        forced_scandoubler;
+wire        direct_video;
 
 wire        ioctl_download;
 wire        ioctl_wr;
@@ -153,8 +153,10 @@ hps_io #(.STRLEN($size(CONF_STR)>>3)) hps_io
 
 	.buttons(buttons),
 	.status(status),
+	.status_menumask({mod_ponp,direct_video}),
 	.forced_scandoubler(forced_scandoubler),
 	.gamma_bus(gamma_bus),
+	.direct_video(direct_video),
 
 	.ioctl_download(ioctl_download),
 	.ioctl_wr(ioctl_wr),
@@ -209,26 +211,36 @@ reg btn_thrust = 0;
 reg btn_shield = 0;
 reg btn_start_1=0;
 
-wire [7:0] BUTTONS = {~btn_right & ~joy[0],~btn_left & ~joy[1],~(btn_one_player|btn_start_1) & ~joy[7],~btn_two_players,~btn_fire & ~joy[4],~btn_coin & ~joy[7],~btn_thrust & ~joy[5],~btn_shield & ~joy[6]};
+wire [7:0] BUTTONS = {~btn_right & ~joy[0],~btn_left & ~joy[1],~(btn_one_player|btn_start_1) & ~joy[7],~btn_two_players,~btn_fire & ~joy[4],~btn_coin & ~joy[8],~btn_thrust & ~joy[5],~btn_shield & ~joy[6]};
+
 wire hblank, vblank;
-/*
 wire hs, vs;
-wire [2:0] r,g;
-wire [2:0] b;
+wire [2:0] r,g,b;
+
+wire no_rotate = status[2] | direct_video;
 
 reg ce_pix;
-always @(posedge clk_24) begin
-        reg old_clk;
-
-        old_clk <= clk_6;
-        ce_pix <= old_clk & ~clk_6;
+always @(posedge clk_50) begin
+       ce_pix <= !ce_pix;
 end
+/*
+reg ce_pix;
+always @(posedge clk_50) begin
+        reg [1:0] div;
 
-arcade_fx #(640,9) arcade_video
+        div <= div + 1'd1;
+        ce_pix <= !div;
+end
+*/
+
+//arcade_video #(320,240,9) arcade_video
+//arcade_video #(320,480,9) arcade_video
+arcade_video #(640,480,9) arcade_video
+//arcade_video #(512,512,9) arcade_video
 (
         .*,
 
-        .clk_video(clk_24),
+        .clk_video(clk_50),
 
         .RGB_in({r,g,b}),
         .HBlank(hblank),
@@ -236,14 +248,12 @@ arcade_fx #(640,9) arcade_video
         .HSync(~hs),
         .VSync(~vs),
 
+	.no_rotate(1),
+        .rotate_ccw(0),
         .fx(status[5:3])
 );
-*/
-wire ce_vid = 1; 
-wire hs, vs;
-wire [2:0] r,g;
-wire [2:0] b;
 
+/*
 assign VGA_CLK  = clk_25; 
 assign VGA_CE   = ce_vid;
 assign VGA_R    = {r,r,r[2:1]};
@@ -263,7 +273,7 @@ assign HDMI_HS  = VGA_HS;
 assign HDMI_VS  = VGA_VS;
 //assign HDMI_SL  = status[2] ? 2'd0   : status[4:3];
 assign HDMI_SL  = 2'd0;
-
+*/
 
 wire reset = (RESET | status[0] |  buttons[1] | ioctl_download);
 wire [7:0] audio;
