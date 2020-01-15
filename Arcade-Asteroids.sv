@@ -215,7 +215,7 @@ wire [7:0] BUTTONS = {~btn_right & ~joy[0],~btn_left & ~joy[1],~(btn_one_player|
 
 wire hblank, vblank;
 wire hs, vs;
-wire [2:0] r,g,b;
+wire [3:0] r,g,b;
 
 wire no_rotate = status[2] | direct_video;
 
@@ -235,7 +235,7 @@ end
 
 //arcade_video #(320,240,9) arcade_video
 //arcade_video #(320,480,9) arcade_video
-arcade_video #(640,480,9) arcade_video
+arcade_video #(640,480,12) arcade_video
 //arcade_video #(512,512,9) arcade_video
 (
         .*,
@@ -250,7 +250,7 @@ arcade_video #(640,480,9) arcade_video
 
 	.no_rotate(1),
         .rotate_ccw(0),
-        .fx(status[5:3])
+        .fx(0)
 );
 
 /*
