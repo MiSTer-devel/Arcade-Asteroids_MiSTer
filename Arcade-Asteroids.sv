@@ -106,13 +106,13 @@ localparam CONF_STR = {
 	"-;",
 	"R0,Reset;",
 	"J1,Fire,Thrust,Hyperspace,Start,Coin;",	
-	"jn,A,X,B,Start,Select,R;",
+	"jn,A,X,B,Start,R;",
 	"V,v",`BUILD_DATE
 };
 
 ////////////////////   CLOCKS   ///////////////////
 
-wire clk_6, clk_25,clk_50;
+wire clk_6, clk_25, clk_50;
 wire pll_locked;
 
 pll pll
@@ -153,7 +153,7 @@ hps_io #(.STRLEN($size(CONF_STR)>>3)) hps_io
 
 	.buttons(buttons),
 	.status(status),
-	.status_menumask({mod_ponp,direct_video}),
+	.status_menumask(direct_video),
 	.forced_scandoubler(forced_scandoubler),
 	.gamma_bus(gamma_bus),
 	.direct_video(direct_video),
@@ -181,9 +181,9 @@ always @(posedge clk_25) begin
 			'h006: btn_two_players  <= pressed; // F2
 			'h01C: btn_left      	<= pressed; // A
 			'h023: btn_right      	<= pressed; // D
-			'h004: btn_coin  			<= pressed; // F3
-			'h04b: btn_thrust  			<= pressed; // L
-			'h042: btn_shield  			<= pressed; // K
+			'h004: btn_coin  	<= pressed; // F3
+			'h04b: btn_thrust  	<= pressed; // L
+			'h042: btn_shield  	<= pressed; // K
 //			'hX75: btn_up          <= pressed; // up
 //			'hX72: btn_down        <= pressed; // down
 			'hX6B: btn_left        <= pressed; // left
@@ -217,26 +217,13 @@ wire hblank, vblank;
 wire hs, vs;
 wire [3:0] r,g,b;
 
-wire no_rotate = status[2] | direct_video;
 
 reg ce_pix;
 always @(posedge clk_50) begin
        ce_pix <= !ce_pix;
 end
-/*
-reg ce_pix;
-always @(posedge clk_50) begin
-        reg [1:0] div;
 
-        div <= div + 1'd1;
-        ce_pix <= !div;
-end
-*/
-
-//arcade_video #(320,240,9) arcade_video
-//arcade_video #(320,480,9) arcade_video
 arcade_video #(640,480,12) arcade_video
-//arcade_video #(512,512,9) arcade_video
 (
         .*,
 
@@ -250,30 +237,10 @@ arcade_video #(640,480,12) arcade_video
 
 	.no_rotate(1),
         .rotate_ccw(0),
+	.forced_scandoubler(0),
         .fx(0)
 );
 
-/*
-assign VGA_CLK  = clk_25; 
-assign VGA_CE   = ce_vid;
-assign VGA_R    = {r,r,r[2:1]};
-assign VGA_G    = {g,g,g[2:1]};
-assign VGA_B    = {b,b,b[2:1]};
-assign VGA_HS   = ~hs;
-assign VGA_VS   = ~vs;
-assign VGA_DE   = vgade;
-
-assign HDMI_CLK = VGA_CLK;
-assign HDMI_CE  = VGA_CE;
-assign HDMI_R   = VGA_R ;
-assign HDMI_G   = VGA_G ;
-assign HDMI_B   = VGA_B ;
-assign HDMI_DE  = VGA_DE;
-assign HDMI_HS  = VGA_HS;
-assign HDMI_VS  = VGA_VS;
-//assign HDMI_SL  = status[2] ? 2'd0   : status[4:3];
-assign HDMI_SL  = 2'd0;
-*/
 
 wire reset = (RESET | status[0] |  buttons[1] | ioctl_download);
 wire [7:0] audio;
