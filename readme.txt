@@ -25,7 +25,21 @@ The rbf file is in releases
 
                                 *** Attention ***
 
-ROM is not included. In order to use this arcade, you need to provide a correct ROM file.
+ROMs are not included. In order to use this arcade, you need to provide the correct ROMs.
+
+To simplify the process a .mra file is provided in this repository, that specifies the required ROMs with checksums.
+The ROMs .zip filename refers to the corresponding file of the MAME ROM collection.
+
+Put the files in the following structure on the SD card.
+
+/_Arcade/<game name>.mra
+/_Arcade/cores/<game rbf>.rbf
+/_Arcade/mame/<mame rom>.zip
+/_Arcade/hbmame/<hbmame rom>.zip
+
+Please refer to https://github.com/MiSTer-devel/Main_MiSTer/wiki/Arcade-Roms for up to date information about the process, the .mra file
+
+Deprecated method for compatibility - do not use for new installations:
 
 Find this zip file somewhere. You need to find the file exactly as required.
 Do not rename other zip files even if they also represent the same game - they are not compatible!
