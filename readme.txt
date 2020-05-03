@@ -19,7 +19,7 @@ This is a Model of Asteroids hardware adapted from Asteroids Deluxe by James Swe
 
 -- OSD language selection
 
-The rbf file is in releases
+The rbf and mra file is in releases
 
 ---------------------------------------------------------------------------------
 
