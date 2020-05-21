@@ -286,19 +286,19 @@ begin
       when "0001" => video_r <= "0001";video_g <= "0001";video_b <= "0001";
       when "0010" => video_r <= "0011";video_g <= "0011";video_b <= "0011";
       when "0011" => video_r <= "0011";video_g <= "0011";video_b <= "0011";
-      when "0100" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
-      when "0101" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
-      when "0110" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
-      when "0111" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
+      when "0100" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
+      when "0101" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
+      when "0110" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
+      when "0111" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
       -- when "1000" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
-      when "1000" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
+      when "1000" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
       --when "1001" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
-      when "1001" => video_r <= "0011";video_g <= "0011";video_b <= "0111";
-		when "1010" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
-		when "1011" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
-		when "1100" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
-		when "1101" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
-		when "1110" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
+      when "1001" => video_r <= "0111";video_g <= "0111";video_b <= "1111"; -- blue
+      when "1010" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
+      when "1011" => video_r <= "0111";video_g <= "0111";video_b <= "0111";
+      when "1100" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
+      when "1101" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
+      when "1110" => video_r <= "1111";video_g <= "1111";video_b <= "1111";
       when others => video_r <= "1111";video_g <= "1111";video_b <= "1111";
     end case;
       VIDEO_R_OUT <= video_r;
