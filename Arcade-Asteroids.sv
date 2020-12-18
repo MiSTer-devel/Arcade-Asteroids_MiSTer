@@ -193,19 +193,30 @@ always @(posedge clk_50) begin
        ce_pix <= !ce_pix;
 end
 
+
+reg [3:0] r2;
+reg [3:0] g2;
+reg [3:0] b2;
+
+always @(posedge clk_50) begin
+    r2<=r;
+	 g2<=g;
+    b2<=b;
+end
+
 arcade_video #(640,12) arcade_video
 (
         .*,
 
         .clk_video(clk_50),
 
-        .RGB_in({r,g,b}),
+        .RGB_in({r2,g2,b2}),
         .HBlank(hblank),
         .VBlank(vblank),
         .HSync(~hs),
         .VSync(~vs),
 
-	.forced_scandoubler(0),
+        .forced_scandoubler(0),
         .fx(0)
 );
 
