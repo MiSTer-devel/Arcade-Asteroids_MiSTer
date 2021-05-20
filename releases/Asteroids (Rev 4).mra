@@ -1,0 +1,49 @@
+<misterromdescription>
+	<name>Asteroids</name>
+	<region></region>
+	<homebrew>no</homebrew>
+	<bootleg>no</bootleg>
+	<version>Rev 4</version>
+	<alternative></alternative>
+	<platform></platform>
+	<series></series>
+	<year>1979</year>
+	<manufacturer>Atari</manufacturer>
+	<category>Shooter - Multidirectional</category>
+
+	<setname>Asteroids</setname>
+	<parent>Asteroids</parent>
+	<mameversion>0220</mameversion>
+	<rbf>asteroids</rbf>
+	<about></about>
+
+	<resolution>31kHz</resolution>
+	<rotation>horizontal</rotation>
+	<flip></flip>
+
+	<players>1</players>
+	<joystick></joystick>
+	<special_controls></special_controls>
+	<num_buttons>5</num_buttons>
+	<button_names></button_names>
+
+	<switches></switches>
+
+	<rom index="1"></rom>
+	<rom index="0" md5="1bcd2899e3f92d2824a2ac9def2d3286" zip="asteroid.zip">
+		<part crc="b503eaf7" name="035145-04e.ef2"></part>
+		<part crc="25233192" name="035144-04e.h2"></part>
+		<part crc="312caa02" name="035143-02.j2"></part>
+		<part crc="8b71fd9e" name="035127-02.np3"></part>
+		<part crc="97953db8" name="034602-01.c8"></part>
+		</rom>
+	<rom index="2"></rom>
+	<rom index="3"></rom>
+	<rom index="4"></rom>
+
+	<nvram></nvram>
+
+	<remark></remark>
+
+	<mratimestamp>20210430005030</mratimestamp>
+</misterromdescription>
