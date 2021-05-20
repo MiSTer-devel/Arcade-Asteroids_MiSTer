@@ -24,12 +24,12 @@
 	<players>1</players>
 	<joystick></joystick>
 	<special_controls></special_controls>
-	<buttons>5</buttons>
+	<num_buttons>5</num_buttons>
 	<button_names></button_names>
 
 	<switches></switches>
 
-	<rom_1></rom_1>
+	<rom index="1"></rom>
 	<rom index="0" md5="1bcd2899e3f92d2824a2ac9def2d3286" zip="asteroid.zip">
 		<part crc="b503eaf7" name="035145-04e.ef2"></part>
 		<part crc="25233192" name="035144-04e.h2"></part>
@@ -37,9 +37,9 @@
 		<part crc="8b71fd9e" name="035127-02.np3"></part>
 		<part crc="97953db8" name="034602-01.c8"></part>
 		</rom>
-	<rom_2></rom_2>
-	<rom_3></rom_3>
-	<rom_4></rom_4>
+	<rom index="2"></rom>
+	<rom index="3"></rom>
+	<rom index="4"></rom>
 
 	<nvram></nvram>
 
