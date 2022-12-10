@@ -7,6 +7,7 @@
 	<manufacturer>Atari</manufacturer>
 	<category>Space / Asteroids</category>
 	<category>Space / Fighter</category>
+	<rotation>horizontal</rotation>
 	<rbf>asteroids</rbf>
 	<rom index="0" zip="asteroid.zip" md5="1bcd2899e3f92d2824a2ac9def2d3286">
 		<part crc="b503eaf7" name="035145-04e.ef2"/>
